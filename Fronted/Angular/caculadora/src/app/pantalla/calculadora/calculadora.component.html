@@ -1,1 +1,14 @@
-<p>calculadora works!</p>
+<div class="calculadora">
+ <div class="pantalla">
+  <div class="resultado-linea">
+    {{ pantalla || '0' }} 
+    <span *ngIf="resultado !== 0"> = {{ resultado }}</span>
+  </div>
+</div>
+
+  <app-botones
+    (numeroPresionado)="agregar($event)"
+    (calcularOperacion)="calcular()"
+    (limpiarPantalla)="limpiar()"
+  ></app-botones>
+</div>

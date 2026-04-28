@@ -1,0 +1,22 @@
+.calculadora {
+  width: 380px;
+  margin: 50px auto;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #132042;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.pantalla {
+  background: #1a1d34;
+  padding: 30px;
+  text-align: right;
+}
+
+.resultado-linea {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  min-height: 40px;
+  word-wrap: break-word;
+}
