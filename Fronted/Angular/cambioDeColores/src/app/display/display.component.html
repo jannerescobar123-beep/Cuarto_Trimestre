@@ -1,0 +1,18 @@
+<div class="contenedor">
+
+    <div
+        class="cuadro"
+        [style.background]="colorActual">
+
+    </div>
+
+    <p class="texto">
+        Color seleccionado:
+        {{ textoColor }}
+    </p>
+
+    <app-buttons-colors
+        (eventoColor)="cambiarColor($event)">
+    </app-buttons-colors>
+
+</div>

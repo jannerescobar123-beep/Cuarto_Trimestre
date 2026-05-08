@@ -1,0 +1,49 @@
+.botones {
+  display: flex;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+button {
+  width: 130px;
+
+  height: 55px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.rojo {
+  background: #ef4444;
+}
+
+.azul {
+  background: #3b82f6;
+}
+
+.verde {
+  background: #22c55e;
+}
+
+.morado {
+  background: #a855f7;
+}
