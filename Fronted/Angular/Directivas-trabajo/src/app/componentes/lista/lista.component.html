@@ -1,0 +1,24 @@
+<div class="contenedor">
+  <h1>TRABAJO DE ALEJOO</h1>
+
+  <p>Estado: {{ estado | titlecase }}</p>
+
+  <button *ngIf="estado !== 'cargando'" (click)="manejarBoton()">
+    {{ estado === 'exito' ? 'Borrar' : 'Cargar' }}
+  </button>
+
+  <div *ngIf="estado === 'cargando'" class="cargando">
+    <p>Cargando datos...</p>
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="estado === 'pendiente'" class="pendiente">
+    <p>No hay datos cargados. cargueloss!!!!!!!!!!!! SIUUUUUUUUUU</p>
+  </div>
+
+  <ul *ngIf="estado === 'exito'">
+    <li *ngFor="let item of elementos" [ngClass]="{'par': item.id % 2 === 0}">
+      {{ item.nombre }}
+    </li>
+  </ul>
+</div>
