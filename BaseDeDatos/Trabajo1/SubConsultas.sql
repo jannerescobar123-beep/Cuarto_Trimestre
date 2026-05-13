@@ -1,4 +1,4 @@
-CREATE TABLE productos (
+tema CREATE TABLE productos (
     id_producto INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nombre VARCHAR(100),
     categoria VARCHAR(50),
@@ -46,9 +46,10 @@ INSERT INTO pedidos (fecha, id_cliente, id_producto) VALUES
 ('2023-12-09', 3, 10);
 
 
-select * from pedidos
+select * from productos p 
 
 -- Obtener todos los productos cuyo precio es mayor que el precio del producto más caro dividido 3.
+create view precioMayorDividido3 as
 SELECT * FROM productos
 WHERE precio > (
 SELECT MAX(precio) / 3
@@ -56,6 +57,7 @@ FROM productos
 );
 
 -- Obtener el nombre y precio de los productos que han sido pedidos por el cliente con id_cliente = 1.
+create view pedidosDeCliente1 as
 SELECT nombre, precio
 FROM productos
 WHERE id_producto IN (
@@ -66,18 +68,20 @@ WHERE id_cliente = 1
 
 -- Obtener el precio promedio de los productos en cada categoría.
 
+create view promedioPorCategoria as
 select categoria, avg(precio) as promedio_precio
 from productos
 group by categoria;
 
 
 -- Encontrar el precio del producto más barato en la categoría 'Computación'.
+create view masBaratoDeComputacion as
 select  min(precio) as precio_barato
 from productos 
 where categoria = 'Computación';
 
 -- Obtener los detalles de los pedidos realizados en la fecha más reciente.
-
+create view pedidosFechaMasReciente as
 select * 
 from pedidos
 where fecha = (
@@ -85,17 +89,186 @@ select max(fecha)
 from pedidos 
 );
 
--- Listar los productos que no han sido pedidos por ningún cliente.
+-- Listar los productos que no han sido pedidos por ningún cliente.7
+create view pedidoPorNingunCliente as
 select * from productos
 where id_producto not in (
 select id_producto from pedidos
 );
 -- Encontrar la cantidad total gastada por cada cliente.
-
+create view totalGastadoPorCliente as
 SELECT id_cliente, SUM(precio)
 FROM pedidos
 JOIN productos ON pedidos.id_producto = productos.id_producto
 GROUP BY id_cliente;
+
+-- Obtener el nombre del producto más caro.
+create view productoMasCaro as
+SELECT nombre
+FROM productos
+WHERE precio = (
+    SELECT MAX(precio)
+    FROM productos
+);
+-- Obtener el precio de los productos que han sido pedidos más de una vez.
+create view  pedidoMasDeUnaVez as
+SELECT p.nombre, p.precio
+FROM productos p
+JOIN pedidos pe 
+ON p.id_producto = pe.id_producto
+GROUP BY p.id_producto, p.nombre, p.precio
+HAVING COUNT(*) > 1;
+
+
+-- 10. Encontrar el cliente que ha realizado el mayor número de pedidos.
+
+CREATE VIEW cliente_mas_pedidos AS
+SELECT id_cliente, COUNT(*) AS total_pedidos
+FROM pedidos
+GROUP BY id_cliente
+HAVING COUNT(*) = (
+    SELECT MAX(total)
+    FROM (
+        SELECT COUNT(*) AS total
+        FROM pedidos
+        GROUP BY id_cliente
+    ) AS subconsulta
+);
+
+-- 11. Obtener los productos que tienen un precio mayor al precio promedio de los productos.
+
+CREATE VIEW productos_mayor_promedio AS
+SELECT *
+FROM productos
+WHERE precio > (
+    SELECT AVG(precio)
+    FROM productos
+);
+
+-- 12. Listar los productos que han sido pedidos en la fecha más antigua.
+
+CREATE VIEW productos_fecha_antigua AS
+SELECT p.*
+FROM productos p
+JOIN pedidos pe
+ON p.id_producto = pe.id_producto
+WHERE pe.fecha = (
+    SELECT MIN(fecha)
+    FROM pedidos
+);
+
+-- 13. Obtener el nombre y precio de los productos que han sido pedidos por más de 3 clientes diferentes.
+
+CREATE VIEW productos_mas_3_clientes AS
+SELECT p.nombre, p.precio
+FROM productos p
+JOIN pedidos pe
+ON p.id_producto = pe.id_producto
+GROUP BY p.id_producto, p.nombre, p.precio
+HAVING COUNT(DISTINCT pe.id_cliente) > 3;
+	
+-- 14. Encontrar los productos en la categoría 'Audio' que han sido pedidos al menos una vez.
+
+CREATE VIEW productos_audio_pedidos AS
+SELECT *
+FROM productos
+WHERE categoria = 'Audio'
+AND id_producto IN (
+    SELECT id_producto
+    FROM pedidos
+);
+
+-- 15. Obtener los productos que fueron pedidos al menos una vez.
+
+CREATE VIEW productos_pedidos AS
+SELECT *
+FROM productos
+WHERE id_producto IN (
+    SELECT DISTINCT id_producto
+    FROM pedidos
+);
+
+-- 16. Listar el cliente que ha gastado más en total.
+
+CREATE VIEW cliente_mas_gasto AS
+SELECT pe.id_cliente, SUM(p.precio) AS total_gastado
+FROM pedidos pe
+JOIN productos p
+ON pe.id_producto = p.id_producto
+GROUP BY pe.id_cliente
+HAVING SUM(p.precio) = (
+    SELECT MAX(total)
+    FROM (
+        SELECT SUM(p2.precio) AS total
+        FROM pedidos pe2
+        JOIN productos p2
+        ON pe2.id_producto = p2.id_producto
+        GROUP BY pe2.id_cliente
+    ) AS subconsulta
+);
+
+-- 17. Obtener todos los pedidos que incluyen productos cuyo precio es superior al precio promedio de los productos.
+
+CREATE VIEW pedidos_precio_superior_promedio AS
+SELECT pe.*
+FROM pedidos pe
+JOIN productos p
+ON pe.id_producto = p.id_producto
+WHERE p.precio > (
+    SELECT AVG(precio)
+    FROM productos
+);
+
+
+-- 18. Obtener el nombre de los productos que han sido pedidos por el cliente con id_cliente = 2,
+-- pero no han sido pedidos por el cliente con id_cliente = 1.
+
+CREATE VIEW productos_cliente2_no_cliente1 AS
+SELECT nombre
+FROM productos
+WHERE id_producto IN (
+    SELECT id_producto
+    FROM pedidos
+    WHERE id_cliente = 2
+)
+AND id_producto NOT IN (
+    SELECT id_producto
+    FROM pedidos
+    WHERE id_cliente = 1
+);
+
+-- 19. Encontrar los productos que no han sido pedidos en los últimos 30 días.
+
+CREATE VIEW productos_no_ultimos_30_dias AS
+SELECT *
+FROM productos
+WHERE id_producto NOT IN (
+    SELECT id_producto
+    FROM pedidos
+    WHERE fecha >= CURRENT_DATE - INTERVAL '30 days'
+);
+
+
+-- 20. Obtener el promedio de precios de los productos en la categoría 'Telefonía'
+-- para los pedidos realizados en el mes más reciente.
+
+CREATE VIEW promedio_telefonia_mes_reciente AS
+SELECT AVG(p.precio) AS promedio_precio
+FROM productos p
+JOIN pedidos pe
+ON p.id_producto = pe.id_producto
+WHERE p.categoria = 'Telefonía'
+AND DATE_TRUNC('month', pe.fecha) = (
+    SELECT DATE_TRUNC('month', MAX(fecha))
+    FROM pedidos
+);
+
+
+
+
+
+
+
 
 
 
