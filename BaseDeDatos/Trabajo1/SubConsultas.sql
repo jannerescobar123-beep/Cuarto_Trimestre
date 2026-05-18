@@ -266,10 +266,85 @@ AND DATE_TRUNC('month', pe.fecha) = (
 
 
 
+-- Subconsultas IN --    MINI TALLER
+
+-- Eliminar tablas si existen
+DROP TABLE IF EXISTS clientes;
+
+DROP TABLE IF EXISTS ciudades;
+
+-- Crear tabla ciudades
+CREATE TABLE ciudades (
+    codigo SERIAL PRIMARY KEY,
+    nombre VARCHAR(20)
+);
+
+-- Crear tabla clientes
+CREATE TABLE clientes (
+    codigo SERIAL PRIMARY KEY,
+    nombre VARCHAR(30),
+    domicilio VARCHAR(30),
+    codigociudad SMALLINT NOT NULL,
+
+    CONSTRAINT fk_ciudad
+    FOREIGN KEY (codigociudad)
+    REFERENCES ciudades(codigo)
+);
+
+-- Insertar ciudades
+INSERT INTO ciudades (nombre) VALUES
+('Bogotá'),
+('Medellín'),
+('Cali'),
+('Barranquilla'),
+('Cartagena'),
+('Bucaramanga'),
+('Pereira');
+
+-- Insertar clientes
+INSERT INTO clientes (nombre, domicilio, codigociudad) VALUES
+('Ana Pérez', 'Calle 10 #15-30', 1),
+('Bernardo Gómez', 'Carrera 7 #20-10', 3),
+('Carolina Martínez', 'Avenida Bolívar #5-12', 2),
+('Daniel Silva', 'Calle 50 #45-22', 4),
+('Elizabeth Ramírez', 'Carrera 3 #18-05', 5),
+('Fernando López', 'Avenida Santander #10-25', 1),
+('Gabriela Castro', 'Calle 25 #32-18', 2),
+('Hugo Moreno', 'Carrera 15 #40-08', 3),
+('Inés Rojas', 'Avenida Boyacá #22-11', 4),
+('Julián Zapata', 'Calle 12 #28-02', 5),
+('Karen Vega', 'Carrera 8 #16-19', 1),
+('Laura Ortiz', 'Avenida Jiménez #30-14', 2),
+('Mateo Duque', 'Calle 42 #38-20', 3),
+('Natalia Herrera', 'Carrera 20 #44-06', 4),
+('Omar Vásquez', 'Avenida NQS #26-13', 5);
 
 
+-- Necesitamos conocer los nombres de las ciudades de aquellos clientes cuyo domicilio es en "Avenida Boyacá", empleando subconsulta.
+create view avenida_Boyaca as 
+SELECT c.nombre AS ciudad
+FROM ciudades c
+INNER JOIN clientes cl 
+ON c.codigo = cl.codigociudad
+WHERE cl.domicilio LIKE '%Avenida Boyacá%';
 
+-- Obtenga los nombre de las ciudades de los clientes cuyo apellido no comienza con una letra específica, empleando subconsulta
+create view apellido_etraEspecifica as
+SELECT c.nombre AS ciudad
+FROM ciudades c
+INNER JOIN clientes cl 
+ON c.codigo = cl.codigociudad
+WHERE cl.nombre NOT IN (
+    SELECT nombre
+    FROM clientes
+    WHERE nombre LIKE 'A%'   -- Cambiar la letra si desea
+);
 
+--  Pruebe la subconsulta anterior separada de la consulta exterior para verificar que retorna una lista de valores de un solo campo
+create view listadeValoresDeUn_soloCampo as
+select codigociudad
+from clientes
+where nombre like 'A%';  -- Cambie la letra según la consulta anterior
 
 
 
