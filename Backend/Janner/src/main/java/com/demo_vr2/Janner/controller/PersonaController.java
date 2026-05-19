@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.demo_vr2.Janner.dto.PersonaDto;
 import com.demo_vr2.Janner.service.PersonaService;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/servicio")
 public class PersonaController {

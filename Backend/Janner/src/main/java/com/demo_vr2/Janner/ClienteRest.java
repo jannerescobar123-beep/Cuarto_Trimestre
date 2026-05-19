@@ -23,34 +23,7 @@ public class ClienteRest {
         miClienteRest.llamarServicioPersona();
     }
 
-    void llamarServicioPersona() {
-        guardarPersona(
-                new PersonaDto(
-                        "555",
-                        "Juan Duque",
-                        "423423",
-                        26,
-                        "Abogado",
-                        "",
-                        2));
-
-        consultarPersonaPorPath(555);
-
-        PersonaDto persona =
-                new PersonaDto();
-
-        persona.setDocumento("555");
-        persona.setNombre("Juan Duque Zapata");
-        persona.setEdad(27);
-        persona.setTipo(3);
-
-        actualizarPersona(persona);
-
-        consultarPersonaPorPath(555);
-
-        eliminarPersona(555);
-
-        consultarPersonaPorPath(555);
+    void llamarServicioPersona() {;
     }
     public void consultarPersona(int id) {
         System.out.println("Iniciando consulta de persona...");

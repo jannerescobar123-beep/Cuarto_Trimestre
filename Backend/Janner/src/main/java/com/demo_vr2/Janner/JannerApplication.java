@@ -15,8 +15,6 @@ public class JannerApplication {
 
 		ClienteRest clienteRest =
 				new ClienteRest();
-
-		clienteRest.llamarServicioPersona();
 	}
 }
 
