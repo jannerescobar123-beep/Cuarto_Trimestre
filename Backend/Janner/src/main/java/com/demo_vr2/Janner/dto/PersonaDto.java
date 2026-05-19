@@ -1,6 +1,7 @@
 package com.demo_vr2.Janner.dto;
 
 public class PersonaDto {
+
     private String documento;
     private String nombre;
     private String telefono;
@@ -9,11 +10,21 @@ public class PersonaDto {
     private String password;
     private int tipo;
 
+    // CONSTRUCTOR VACIO
     public PersonaDto() {
+
     }
 
-    public PersonaDto(String documento, String nombre, String telefono, int edad, String profesion, String password, int tipo) {
-        super();
+    // CONSTRUCTOR CON PARAMETROS
+    public PersonaDto(
+            String documento,
+            String nombre,
+            String telefono,
+            int edad,
+            String profesion,
+            String password,
+            int tipo) {
+
         this.documento = documento;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -22,6 +33,8 @@ public class PersonaDto {
         this.password = password;
         this.tipo = tipo;
     }
+
+    // GETTERS Y SETTERS
 
     public String getDocumento() {
         return documento;
@@ -77,5 +90,21 @@ public class PersonaDto {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    // TOSTRING
+
+    @Override
+    public String toString() {
+
+        return "PersonaDto{" +
+                "documento='" + documento + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", edad=" + edad +
+                ", profesion='" + profesion + '\'' +
+                ", password='" + password + '\'' +
+                ", tipo=" + tipo +
+                '}';
     }
 }

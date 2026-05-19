@@ -1,32 +1,62 @@
 package com.demo_vr2.Janner.service;
 
-import com.demo_vr2.Janner.dao.PersonaDao;
-import com.demo_vr2.Janner.model.Persona;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.demo_vr2.Janner.dao.PersonaDao;
+import com.demo_vr2.Janner.dto.PersonaDto;
 
 import java.util.List;
 
 @Service
 public class PersonaService {
+
     private final PersonaDao personaDao;
 
+    @Autowired
     public PersonaService(PersonaDao personaDao) {
+
         this.personaDao = personaDao;
     }
 
-    public List<Persona> getAllPersonas() {
-        return personaDao.findAll();
+    public PersonaDto obtenerPersonaPorDocumento(
+            String documento) {
+
+        return personaDao
+                .consultarPersonaIndividual(
+                        documento);
     }
 
-    public Persona getPersonaById(Long id) {
-        return personaDao.findById(id);
+    public PersonaDto consultarPersonaIdProfesion(
+            String documento,
+            String profesion) {
+
+        return personaDao
+                .consultarPersonaIdProfesion(
+                        documento,
+                        profesion);
     }
 
-    public Persona savePersona(Persona persona) {
-        return personaDao.save(persona);
-    }
+    public List<PersonaDto> consultarListaPersonas() {
 
-    public void deletePersona(Long id) {
-        personaDao.deleteById(id);
+        return personaDao.consultarListaPersonas();
+    }
+    public PersonaDto guardarPersona(
+            PersonaDto persona) {
+
+        return personaDao
+                .guardarPersona(persona);
+    }
+    public PersonaDto actualizarPersona(
+            PersonaDto persona) {
+
+        return personaDao
+                .actualizarPersona(persona);
+    }
+    public boolean eliminarPersona(
+            String documento) {
+
+        return personaDao
+                .eliminarPersona(documento);
     }
 }
