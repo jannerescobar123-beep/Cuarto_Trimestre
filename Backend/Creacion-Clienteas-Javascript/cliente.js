@@ -56,7 +56,7 @@ async function obtenerPersona() {
             );
 
         }
-// hola
+        // hola
         const persona =
             await respuesta.json();
 
@@ -104,24 +104,24 @@ async function consultarProfesion() {
         return;
     }
     const url = `http://localhost:8080/servicio/profesion?id=${id}&profesion=${encodeURIComponent(profesion)
-} `;
- console.log("URL solicitada:", url);
- try {
- const respuesta = await fetch(url);
- if (!respuesta.ok) {
- const mensajeError = await respuesta.text();
- throw new Error(`Error ${ respuesta.status }: ${ mensajeError } `);
- }
- const profesionDto = await respuesta.json();
- console.log("Profesión encontrada:", profesionDto);
- document.getElementById("nombre").value = profesionDto.nombre || "";
- document.getElementById("telefono").value = profesionDto.telefono || "";
- document.getElementById("edad").value = profesionDto.edad || "";
- document.getElementById("profesion").value = profesionDto.profesion || "";
- document.getElementById("password").value = profesionDto.password || "";
- document.getElementById("tipo").value = profesionDto.tipo || "";
- } catch (error) {
- console.error("Error al consultar la profesión:", error);
- alert("Hubo un problema al consultar la profesión: " + error.message);
- }
+        } `;
+    console.log("URL solicitada:", url);
+    try {
+        const respuesta = await fetch(url);
+        if (!respuesta.ok) {
+            const mensajeError = await respuesta.text();
+            throw new Error(`Error ${respuesta.status}: ${mensajeError} `);
+        }
+        const profesionDto = await respuesta.json();
+        console.log("Profesión encontrada:", profesionDto);
+        document.getElementById("nombre").value = profesionDto.nombre || "";
+        document.getElementById("telefono").value = profesionDto.telefono || "";
+        document.getElementById("edad").value = profesionDto.edad || "";
+        document.getElementById("profesion").value = profesionDto.profesion || "";
+        document.getElementById("password").value = profesionDto.password || "";
+        document.getElementById("tipo").value = profesionDto.tipo || "";
+    } catch (error) {
+        console.error("Error al consultar la profesión:", error);
+        alert("Hubo un problema al consultar la profesión: " + error.message);
+    }
 }
