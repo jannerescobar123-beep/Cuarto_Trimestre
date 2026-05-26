@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Productos</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>
+            Sistema de Gestión de Productos
+        </h1>
+
+        <div class="formulario">
+
+            <input type="hidden" id="id">
+
+            <input type="text" id="codigo" placeholder="Código">
+
+            <input type="text" id="nombre" placeholder="Nombre">
+
+            <input type="text" id="descripcion" placeholder="Descripción">
+
+            <input type="number" id="precio" placeholder="Precio">
+
+            <input type="number" id="cantidad" placeholder="Cantidad">
+
+            <select id="estado">
+
+                <option value="Activo">
+                    Activo
+                </option>
+
+                <option value="Inactivo">
+                    Inactivo
+                </option>
+
+            </select>
+
+            <button onclick="guardarProducto()">
+
+                Guardar Producto
+
+            </button>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaProductos">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
