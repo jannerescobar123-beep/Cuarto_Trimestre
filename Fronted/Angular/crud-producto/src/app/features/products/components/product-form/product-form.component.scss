@@ -1,0 +1,24 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
+button:disabled {
+  background: gray;
+}

@@ -1,0 +1,13 @@
+.contenedor {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.izquierda {
+  flex: 2;
+}
+
+.derecha {
+  flex: 1;
+}

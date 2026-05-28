@@ -1,0 +1,22 @@
+<div class="formulario">
+
+  <input
+    type="text"
+    [(ngModel)]="nombre"
+    placeholder="Nombre"
+  >
+
+  <input
+    type="number"
+    [(ngModel)]="precio"
+    placeholder="Precio"
+  >
+
+  <button
+    (click)="crearProducto()"
+    [disabled]="nombre === '' || precio <= 0"
+  >
+    Crear
+  </button>
+
+</div>

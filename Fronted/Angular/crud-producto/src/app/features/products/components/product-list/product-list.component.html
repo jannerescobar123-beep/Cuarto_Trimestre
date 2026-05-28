@@ -1,0 +1,17 @@
+<div class="lista">
+
+  <div *ngIf="productos.length === 0">
+
+    <h2>No hay productos para mostrar</h2>
+
+  </div>
+
+  <div *ngFor="let producto of productos">
+
+    <app-product-card
+      [producto]="producto">
+    </app-product-card>
+
+  </div>
+
+</div>
