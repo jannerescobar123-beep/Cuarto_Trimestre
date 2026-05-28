@@ -106,4 +106,14 @@ public class ProductoController {
         return ResponseEntity.ok(
                 "Producto eliminado correctamente");
     }
+
+    @GetMapping("validar-codigo")
+    public ResponseEntity<?> validarCodigo(
+            @RequestParam String codigo) {
+
+        boolean existe =
+                productoService.existeCodigo(codigo);
+
+        return ResponseEntity.ok(existe);
+    }
 }

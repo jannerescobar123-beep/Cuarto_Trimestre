@@ -72,4 +72,8 @@ public class ProductoService {
 
         return true;
     }
+    public boolean existeCodigo(String codigo) {
+
+        return productoRepository.existsByCodigo(codigo);
+    }
 }

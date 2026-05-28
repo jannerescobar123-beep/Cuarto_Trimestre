@@ -20,24 +20,38 @@ async function listarProductos() {
             <tr>
             
                 <td>${producto.id}</td>
+
                 <td>${producto.codigo}</td>
+
                 <td>${producto.nombre}</td>
+
                 <td>${producto.descripcion}</td>
-                <td>${producto.precio}</td>
+
+                <td>$ ${producto.precio}</td>
+
                 <td>${producto.cantidad}</td>
+
                 <td>${producto.estado}</td>
                 
                 <td>
+
+                    <div class="acciones">
                 
-                    <button class="btn-editar"
-                        onclick="editarProducto(${producto.id})">
-                        Editar
-                    </button>
+                        <button class="btn-editar"
+                            onclick="editarProducto(${producto.id})">
+
+                            Editar
+
+                        </button>
                     
-                    <button class="btn-eliminar"
-                        onclick="eliminarProducto(${producto.id})">
-                        Eliminar
-                    </button>
+                        <button class="btn-eliminar"
+                            onclick="eliminarProducto(${producto.id})">
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
                     
                 </td>
                 
@@ -84,9 +98,28 @@ async function guardarProducto() {
             document.getElementById("estado").value
     };
 
+    // VALIDACION SIMPLE
+    if (producto.nombre === "") {
+
+        alert("El nombre es obligatorio");
+
+        return;
+    }
+
+    const mensaje =
+        document.getElementById("mensajeCodigo")
+            .innerText;
+
+    if (mensaje !== "") {
+
+        alert("El código ya existe");
+
+        return;
+    }
+
     try {
 
-        // SI EXISTE ID -> ACTUALIZA
+        // ACT
         if (producto.id) {
 
             await fetch(`${url}/actualizar`, {
@@ -100,9 +133,10 @@ async function guardarProducto() {
                 body: JSON.stringify(producto)
             });
 
+            alert("Producto actualizado correctamente");
         }
 
-        // SI NO EXISTE -> GUARDA
+        // GUARD
         else {
 
             await fetch(`${url}/guardar`, {
@@ -115,6 +149,8 @@ async function guardarProducto() {
 
                 body: JSON.stringify(producto)
             });
+
+            alert("Producto guardado correctamente");
         }
 
         limpiarFormulario();
@@ -130,7 +166,7 @@ async function guardarProducto() {
     }
 }
 
-// EDITAR PRODUCTO
+// EDITAR P
 async function editarProducto(id) {
 
     try {
@@ -162,6 +198,9 @@ async function editarProducto(id) {
         document.getElementById("estado").value =
             producto.estado;
 
+        document.querySelector(".formulario button")
+            .innerText = "Actualizar Producto";
+
     } catch (error) {
 
         console.error(
@@ -171,8 +210,16 @@ async function editarProducto(id) {
     }
 }
 
-// ELIMINAR PRODUCTO
+// ELIMINAR P
 async function eliminarProducto(id) {
+
+    const confirmar =
+        confirm("¿Desea eliminar este producto?");
+
+    if (!confirmar) {
+
+        return;
+    }
 
     try {
 
@@ -180,6 +227,8 @@ async function eliminarProducto(id) {
 
             method: "DELETE"
         });
+
+        alert("Producto eliminado correctamente");
 
         listarProductos();
 
@@ -192,7 +241,7 @@ async function eliminarProducto(id) {
     }
 }
 
-// LIMPIAR FORMULARIO
+// LIMPIAR 
 function limpiarFormulario() {
 
     document.getElementById("id").value = "";
@@ -208,7 +257,66 @@ function limpiarFormulario() {
     document.getElementById("cantidad").value = "";
 
     document.getElementById("estado").value = "Activo";
+
+    document.querySelector(".formulario button")
+        .innerText = "Guardar Producto";
 }
 
-// CARGAR PRODUCTOS AL INICIAR
+// VALIDAR CODIGO
+async function validarCodigo() {
+
+    const codigo =
+        document.getElementById("codigo").value;
+
+    // SI ESTA VACIO
+    if (codigo === "") {
+
+        return;
+    }
+
+    try {
+
+        const respuesta =
+            await fetch(
+                `${url}/validar-codigo?codigo=${codigo}`
+            );
+
+        const existe =
+            await respuesta.json();
+
+        const inputCodigo =
+            document.getElementById("codigo");
+
+        const mensaje =
+            document.getElementById("mensajeCodigo");
+
+        // SI EXISTE
+        if (existe) {
+
+            inputCodigo.classList.add("error-input");
+
+            mensaje.innerText =
+                "Este código ya existe";
+
+        }
+
+        // SI NO EXISTE
+        else {
+
+            inputCodigo.classList.remove("error-input");
+
+            mensaje.innerText = "";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Error al validar código",
+            error
+        );
+    }
+}
+
+// CARGAR 
 listarProductos();
+

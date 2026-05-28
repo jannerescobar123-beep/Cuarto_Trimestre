@@ -17,68 +17,119 @@
 
     <div class="container">
 
-        <h1>
-            Sistema de Gestión de Productos
-        </h1>
 
-        <div class="formulario">
+        <header class="header">
 
-            <input type="hidden" id="id">
+            <div>
 
-            <input type="text" id="codigo" placeholder="Código">
+                <h1>
+                    Sistema Inteligente de Productos
+                </h1>
 
-            <input type="text" id="nombre" placeholder="Nombre">
+                <p>
+                    Gestión y control de inventario
+                </p>
 
-            <input type="text" id="descripcion" placeholder="Descripción">
+            </div>
 
-            <input type="number" id="precio" placeholder="Precio">
+        </header>
 
-            <input type="number" id="cantidad" placeholder="Cantidad">
 
-            <select id="estado">
 
-                <option value="Activo">
-                    Activo
-                </option>
+        <div class="contenido">
 
-                <option value="Inactivo">
-                    Inactivo
-                </option>
 
-            </select>
 
-            <button onclick="guardarProducto()">
+            <section class="card-formulario">
 
-                Guardar Producto
+                <h2>
+                    Registrar Producto
+                </h2>
 
-            </button>
+                <div class="formulario">
+
+                    <input type="hidden" id="id">
+
+                    <div class="input-group">
+
+                        <input type="text" id="codigo" placeholder="Código" onblur="validarCodigo()">
+
+                        <small id="mensajeCodigo">
+
+                        </small>
+
+                    </div>
+
+                    <input type="text" id="nombre" placeholder="Nombre">
+
+                    <input type="text" id="descripcion" placeholder="Descripción">
+
+                    <input type="number" id="precio" placeholder="Precio">
+
+                    <input type="number" id="cantidad" placeholder="Cantidad">
+
+                    <select id="estado">
+
+                        <option value="Activo">
+                            Activo
+                        </option>
+
+                        <option value="Inactivo">
+                            Inactivo
+                        </option>
+
+                    </select>
+
+                    <button onclick="guardarProducto()">
+
+                        Guardar Producto
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- TABLA -->
+
+            <section class="card-tabla">
+
+                <div class="tabla-header">
+
+                    <h2>
+                        Lista de Productos
+                    </h2>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaProductos">
+
+                    </tbody>
+
+                </table>
+
+            </section>
 
         </div>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="tablaProductos">
-
-            </tbody>
-
-        </table>
 
     </div>
 
