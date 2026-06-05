@@ -129,6 +129,10 @@ select CONCAT_WS(Nombre, Region,' - ') as nombre_region from Agricultores;
 -- Localizar la primera aparición de la letra 'a' en el nombre de cada agricultor.
 -- Utilice la función INSTR.
 
+SELECT Nombre,INSTR(LOWER(Nombre),'a') AS posicion
+FROM Agricultores;
+
+
 -- Obtener los 3 primeros caracteres del nombre de cada producto.
 -- Utilice la función LEFT.
 
