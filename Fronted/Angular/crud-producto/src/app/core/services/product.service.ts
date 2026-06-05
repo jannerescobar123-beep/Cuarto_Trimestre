@@ -6,9 +6,6 @@ import { Product } from '../../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  obtenerProducto(): Product[] {
-    throw new Error('Method not implemented.');
-  }
 
   productos: Product[] = [];
 

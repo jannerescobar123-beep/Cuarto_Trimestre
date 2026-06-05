@@ -1,0 +1,28 @@
+.card {
+  width: 350px;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+.card-header {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.card-header p {
+  color: #777;
+}
+
+.card-body h3 {
+  margin-top: 15px;
+  color: #444;
+}

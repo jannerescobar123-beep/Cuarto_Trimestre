@@ -1,0 +1,16 @@
+<div class="toolbar" *ngIf="users.length ===0; else usersList ">
+  <button (click)="onClick()" class="load-users-btn" [disabled]="isLoading">
+    Cargar usuarios
+  </button>
+</div>
+
+<ng-template #usersList>
+  <app-user-list [users]="users"></app-user-list>
+</ng-template>
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+
+
+
+
+

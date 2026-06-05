@@ -3,20 +3,19 @@
   <input
     type="text"
     [(ngModel)]="nombre"
-    placeholder="Nombre"
-  >
+    placeholder="Nombre">
 
   <input
     type="number"
     [(ngModel)]="precio"
-    placeholder="Precio"
-  >
+    placeholder="Precio">
 
   <button
     (click)="crearProducto()"
-    [disabled]="nombre === '' || precio <= 0"
-  >
+    [disabled]="nombre === '' || precio <= 0">
+
     Crear
+
   </button>
 
 </div>
