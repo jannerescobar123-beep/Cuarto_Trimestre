@@ -14,7 +14,7 @@ import { ProductCardComponent } from './features/products/components/product-car
   declarations: [
     AppComponent,
     ProductFormComponent,
-    ProductListComponent,
+    ProductListComponent, // Registro de componenttes 
     ProductCardComponent
   ],
   imports: [

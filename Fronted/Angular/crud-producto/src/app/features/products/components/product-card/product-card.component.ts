@@ -9,6 +9,7 @@ import { ProductService } from '../../../../core/services/product.service';
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
+  // permite recibir informacion de un componente padre
   @Input() 
   producto!: Product;
 

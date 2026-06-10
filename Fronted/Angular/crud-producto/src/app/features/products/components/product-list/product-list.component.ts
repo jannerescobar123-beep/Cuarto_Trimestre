@@ -8,7 +8,9 @@ import { ProductService } from '../../../../core/services/product.service';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
+
 productos: Product[]= [];
+// obtiene los productos del servicio 
 constructor(private productService: ProductService){
   this.productos =this.productService.obtenerProductos();
 }

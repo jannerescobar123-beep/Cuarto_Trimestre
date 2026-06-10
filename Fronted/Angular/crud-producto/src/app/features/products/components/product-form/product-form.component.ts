@@ -15,7 +15,7 @@ export class ProductFormComponent {
 
   precio: number = 0;
 
-  constructor(
+  constructor( // inteccion de dependencias.
     private productService: ProductService
   ) {}
 
