@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/servicio";
+const url = "https://productos-production-7faf.up.railway.app/servicio";
 
 // LISTAR PRODUCTOS
 async function listarProductos() {
