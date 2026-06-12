@@ -1,0 +1,19 @@
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #2196f3;
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

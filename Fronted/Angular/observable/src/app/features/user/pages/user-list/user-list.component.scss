@@ -1,6 +1,6 @@
-.users-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,
-      minmax(350px, 1fr));
-  gap: 1rem;
+.contenedor-posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
 }

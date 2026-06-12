@@ -1,32 +1,11 @@
 <div class="card">
-  <div class="card-header">
-    <h2>{{ user.name }}</h2>
-    <span>{{'@' + user.username }}</span>
-  </div>
 
-  <div class="card-body">
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Teléfono:</strong> {{ user.phone }}</p>
-    <p><strong>Sitio web:</strong> {{ user.website }}</p>
+  <h2>{{ post.title }}</h2>
 
-    <hr>
+  <p>{{ post.body }}</p>
 
-    <h4>Dirección</h4>
-    <p>{{ user.address.street }}</p>
-    <p>{{ user.address.suite }}</p>
-    <p>{{ user.address.city }}</p>
-    <p>{{ user.address.zipcode }}</p>
+  <small>
+    Usuario: {{ post.userId }}
+  </small>
 
-    <small>
-      Lat: {{ user.address.geo.lat }},
-      Lng: {{ user.address.geo.lng }}
-    </small>
-
-    <hr>
-
-    <h4>Empresa</h4>
-    <p><strong>{{ user.company.name }}</strong></p>
-    <p>{{ user.company.catchPhrase }}</p>
-    <small>{{ user.company.bs }}</small>
-  </div>
 </div>
