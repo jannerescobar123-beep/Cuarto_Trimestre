@@ -9,12 +9,18 @@ import jwtapp.dto.PersonaDTO;
 import  jwtapp.model.Persona;
 import jwtapp.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
 public class PersonaService {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
     @Autowired
     private PersonaRepository personaRepository;
     public List<PersonaDTO> listar() {
@@ -48,6 +54,9 @@ public class PersonaService {
         persona.setDireccion(dto.getDireccion());
         persona.setTelefono(dto.getTelefono());
         persona.setCorreo(dto.getCorreo());
+        if (dto.getPassword() != null  && !dto.getPassword().isBlank()){
+            persona.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
         persona.setPassword(dto.getPassword());
         persona.setRol(dto.getRol());
         Persona actualizada = personaRepository.save(persona);
