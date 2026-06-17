@@ -41,6 +41,7 @@ public class PersonaService {
     */
     public PersonaDTO guardar(PersonaDTO dto) {
         Persona persona = convertirAEntidad(dto);
+        persona.setPassword(passwordEncoder.encode(dto.getPassword())); // ← falta esto
         Persona guardada = personaRepository.save(persona);
         return convertirADTO(guardada);
     }
@@ -54,7 +55,7 @@ public class PersonaService {
         persona.setDireccion(dto.getDireccion());
         persona.setTelefono(dto.getTelefono());
         persona.setCorreo(dto.getCorreo());
-        if (dto.getPassword() != null  && !dto.getPassword().isBlank()){
+        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
             persona.setPassword(passwordEncoder.encode(dto.getPassword()));
         }
         persona.setPassword(dto.getPassword());
@@ -87,5 +88,15 @@ public class PersonaService {
         persona.setPassword(dto.getPassword());
         persona.setRol(dto.getRol());
         return persona;
+    }
+    public Optional<Persona> autenticar(String correo, String password) {
+        Optional<Persona> personaOpt = personaRepository.findByCorreo(correo);
+        if (personaOpt.isPresent()) {
+            Persona persona = personaOpt.get();
+            if (passwordEncoder.matches(password, persona.getPassword())) {
+                return Optional.of(persona);
+            }
+        }
+        return Optional.empty();
     }
 }

@@ -23,7 +23,7 @@ public class PersonaController {
     }
 
     @GetMapping("/mensaje")
-    @PreAuthorize("hasRole('ADMIN','ASESOR')")
+    @PreAuthorize("hasAnyRole('ADMIN','ASESOR')")
     public String mensajePrivado(){
         return "este es un mensaje privadooo desde admin Y ASESORRRR siuuuuuuuuuuuuu ";
     }
