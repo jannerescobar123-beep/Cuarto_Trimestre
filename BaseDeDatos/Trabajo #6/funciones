@@ -1,0 +1,129 @@
+CREATE OR REPLACE FUNCTION ejercicio1(
+    a FLOAT,
+    b FLOAT,
+    c FLOAT,
+    d FLOAT
+)
+RETURNS FLOAT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    resultado FLOAT;
+BEGIN
+    resultado := a + (b / c) + d;
+    RETURN resultado;
+END;
+$$;
+SELECT ejercicio1(10,20,5,3);
+
+CREATE OR REPLACE FUNCTION ejercicio2(
+    a FLOAT,
+    b FLOAT,
+    c FLOAT,
+    d FLOAT
+)
+RETURNS FLOAT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    resultado FLOAT;
+BEGIN
+    resultado :=
+    (a + (b/c) - d)
+    /
+    (
+        a
+        + POWER(c,d)
+        + (
+            b /
+            (
+                (d / (a - (b/c))) * d
+            )
+        )
+    );
+
+    RETURN resultado;
+END;
+$$;
+
+SELECT ejercicio2(5,10,2,3);
+
+CREATE OR REPLACE FUNCTION ejercicio3(
+    a FLOAT,
+    b FLOAT,
+    c FLOAT
+)
+RETURNS FLOAT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    resultado FLOAT;
+BEGIN
+    resultado :=
+    (a + b + c)
+    /
+    (a + (b/c));
+
+    RETURN resultado;
+END;
+$$;
+
+SELECT ejercicio3(4,6,2);
+
+
+
+
+CREATE OR REPLACE FUNCTION ejercicio4(
+    a FLOAT,
+    b FLOAT,
+    c FLOAT,
+    d FLOAT
+)
+RETURNS FLOAT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    resultado FLOAT;
+BEGIN
+    resultado :=
+    (
+        a + b + (c / (d * a))
+    )
+    /
+    (
+        a + b * (c / d)
+    );
+
+    RETURN resultado;
+END;
+$$;
+
+SELECT ejercicio4(2,3,4,5);
+
+
+
+CREATE OR REPLACE FUNCTION ejercicio5(
+    a FLOAT,
+    b FLOAT,
+    c FLOAT
+)
+RETURNS FLOAT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    resultado FLOAT;
+BEGIN
+    resultado :=
+    (
+        (a / b) + (b / c)
+    )
+    /
+    (
+        (a / b) - (b / c)
+    );
+
+    RETURN resultado;
+END;
+$$;
+
+SELECT ejercicio5(10,5,2);

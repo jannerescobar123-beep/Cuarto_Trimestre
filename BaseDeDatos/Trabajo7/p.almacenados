@@ -1,0 +1,103 @@
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE productos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2),
+    stock INT,
+    categoria_id INT REFERENCES categorias(id)
+);
+
+CREATE OR REPLACE PROCEDURE insertar_categoria(
+    p_nombre VARCHAR(100)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO categorias(nombre)
+    VALUES(p_nombre);
+END;
+$$;
+
+CALL insertar_categoria('Tecnología');
+
+
+CREATE OR REPLACE FUNCTION obtener_categorias()
+RETURNS TABLE(
+    id INT,
+    nombre VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT c.id, c.nombre
+    FROM categorias c;
+END;
+$$;
+
+SELECT * FROM obtener_categorias();
+
+CREATE OR REPLACE PROCEDURE actualizar_categoria(
+    p_id INT,
+    p_nombre VARCHAR(100)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE categorias
+    SET nombre = p_nombre
+    WHERE id = p_id;
+END;
+$$;
+
+CALL actualizar_categoria(1,'Electrónica');
+
+CREATE OR REPLACE PROCEDURE eliminar_categoria(
+    p_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM categorias
+    WHERE id = p_id;
+END;
+$$;
+
+CALL eliminar_categoria(1);
+
+-- ___________ PRODUCTOS _____________
+
+CREATE OR REPLACE PROCEDURE insertar_producto(
+    p_nombre VARCHAR(100),
+    p_precio DECIMAL(10,2),
+    p_stock INT,
+    p_categoria_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO productos(
+        nombre,
+        precio,
+        stock,
+        categoria_id
+    )
+    VALUES(
+        p_nombre,
+        p_precio,
+        p_stock,
+        p_categoria_id
+    );
+END;
+$$;
+
+CALL insertar_producto(
+    'Laptop',
+    3500000,
+    10,
+    1
+);
