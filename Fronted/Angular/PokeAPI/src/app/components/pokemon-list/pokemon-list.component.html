@@ -1,0 +1,102 @@
+<div *ngIf="loading" class="loading">
+  Cargando Pokémon...
+</div>
+
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+<!-- Buscador -->
+<div class="busqueda">
+
+  <input
+    type="text"
+    placeholder="Buscar Pokémon..."
+    (input)="buscar($event)">
+
+</div>
+
+<!-- Paginación -->
+<div
+  class="paginacion"
+  *ngIf="textoBusqueda.trim() === ''">
+
+  <button
+    (click)="anteriorPagina()"
+    [disabled]="offset === 0">
+
+    ← Anterior
+
+  </button>
+
+  <span>
+
+    Página {{ (offset / 20) + 1 }}
+
+  </span>
+
+  <button
+    (click)="siguientePagina()">
+
+    Siguiente →
+
+  </button>
+
+</div>
+
+<!-- Tarjetas -->
+<div class="contenedor">
+
+  <div
+    class="card"
+    *ngFor="let pokemon of pokemons">
+
+    <img
+      [src]="pokemon.sprites.front_default"
+      [alt]="pokemon.name">
+
+    <h2>
+
+      {{ pokemon.name | titlecase }}
+
+    </h2>
+
+    <p>
+
+      <strong>Altura:</strong>
+
+      {{ pokemon.height }}
+
+    </p>
+
+    <p>
+
+      <strong>Peso:</strong>
+
+      {{ pokemon.weight }}
+
+    </p>
+
+    <p>
+
+      <strong>Experiencia:</strong>
+
+      {{ pokemon.base_experience }}
+
+    </p>
+
+    <p>
+
+      <strong>Tipos:</strong>
+
+      <span *ngFor="let tipo of pokemon.types">
+
+        {{ tipo.type.name }}
+
+      </span>
+
+    </p>
+
+  </div>
+
+</div>
