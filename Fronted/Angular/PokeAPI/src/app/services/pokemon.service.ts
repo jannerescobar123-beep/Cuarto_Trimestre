@@ -47,12 +47,12 @@ export class PokemonService {
 
   getPokemons(offset: number): Observable<Pokemon[]> {
 
-    return this.getPokemonList(offset).pipe(
+    return this.getPokemonList(offset).pipe( // trasforma la informacion
 
-      switchMap((response) => {
+      switchMap((response) => { // recibe la respuesta
 
-        const requests = response.results.map((pokemon) =>
-          this.http.get<Pokemon>(pokemon.url)
+        const requests = response.results.map((pokemon) => // recorre los pokemones
+          this.http.get<Pokemon>(pokemon.url) // y ejecuta cada uno
         );
 
         return forkJoin(requests);
