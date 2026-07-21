@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { passwordMatchValidator } from '../../validators/password-match.validator';
+import { CommonModule } from '@angular/common';
 
 import {
   FormBuilder,
@@ -11,7 +12,7 @@ import {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -64,5 +65,17 @@ export class RegisterComponent implements OnInit {
   validators: passwordMatchValidator()
 });
   }
+
+  onSubmit(): void {
+
+  if (this.registerForm.valid) {
+
+    console.log(this.registerForm.value);
+
+    alert('Registro exitoso');
+
+  }
+
+}
 
 }

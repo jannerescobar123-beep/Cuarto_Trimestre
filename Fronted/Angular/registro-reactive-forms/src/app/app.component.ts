@@ -8,6 +8,4 @@ import { RegisterComponent } from './components/register/register.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'registro-reactive-forms';
-}
+export class AppComponent {}
