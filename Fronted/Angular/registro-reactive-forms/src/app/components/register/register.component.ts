@@ -12,13 +12,15 @@ import {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
+  showPassword = false;
+  showConfirmPassword = false;
 
 
 
@@ -27,55 +29,62 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm = this.fb.group({
 
-  nombre: ['', [Validators.required, Validators.minLength(3)]],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
 
-  correo: ['', [
-    Validators.required,
-    Validators.email
-  ]],
+      correo: ['', [
+        Validators.required,
+        Validators.email
+      ]],
 
-  usuario: ['', [
-    Validators.required,
-    Validators.pattern(/^[a-zA-Z0-9_]+$/)
-  ]],
+      usuario: ['', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9_]+$/)
+      ]],
 
-  password: ['', [
-    Validators.required,
-    Validators.minLength(8)
-  ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
 
-  confirmarPassword: [
-    '',
-    Validators.required
-  ],
+      confirmarPassword: [
+        '',
+        Validators.required
+      ],
 
-  edad: ['', [
-    Validators.required,
-    Validators.min(15),
-    Validators.max(90)
-  ]],
+      edad: ['', [
+        Validators.required,
+        Validators.min(15),
+        Validators.max(90)
+      ]],
 
-  terminos: [
-    false,
-    Validators.requiredTrue
-  ]
+      terminos: [
+        false,
+        Validators.requiredTrue
+      ]
 
-},
-{
-  validators: passwordMatchValidator()
-});
+    },
+      {
+        validators: passwordMatchValidator()
+      });
   }
 
   onSubmit(): void {
 
-  if (this.registerForm.valid) {
+    if (this.registerForm.valid) {
 
-    console.log(this.registerForm.value);
+      console.log(this.registerForm.value);
 
-    alert('Registro exitoso');
+      alert('Registro exitoso');
+
+    }
 
   }
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
 
-}
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
 
 }
