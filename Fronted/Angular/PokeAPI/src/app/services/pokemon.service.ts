@@ -9,12 +9,12 @@ import {
   shareReplay
 } from 'rxjs';
 
+
 import {
   switchMap,
   map,
   catchError
 } from 'rxjs/operators';
-
 import {
   Pokemon,
   PokemonListResponse
